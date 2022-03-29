@@ -1,0 +1,200 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:image_picker/image_picker.dart';
+
+// ignore: camel_case_types
+class readMeater extends StatefulWidget {
+  const readMeater({Key? key}) : super(key: key);
+
+  @override
+  _readMeaterState createState() => _readMeaterState();
+}
+
+// ignore: camel_case_types
+class _readMeaterState extends State<readMeater> {
+  String imagePath = "asd";
+  late File myImagePath;
+  String finalText = ' ';
+  bool isLoaded = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 100,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.5,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.teal,
+              child: isLoaded
+                  ? Image.file(
+                      myImagePath,
+                      fit: BoxFit.fill,
+                    )
+                  :const Text("This is image section "),
+            ),
+            Center(
+                child: TextButton(
+                    onPressed: () {
+                      getImage();
+
+                      /*Future.delayed(const Duration(seconds: 5), () {
+                        getText(imagePath);
+                      });*/
+                    },
+                    child: Text(
+                      "Pick Image",
+                      style: GoogleFonts.aBeeZee(
+                        fontSize: 30,
+                      ),
+                    ))),
+            Text(
+              (finalText != " ") ? finalText : "This is my text",
+              style: GoogleFonts.aBeeZee(
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+/*  Future getText(String path) async {
+    final inputImage = InputImage.fromFilePath(path);
+    final textDetector = GoogleMlKit.vision.textDetector();
+    final RecognisedText _reconizedText =
+        await textDetector.processImage(inputImage);
+
+    for (TextBlock block in _reconizedText.blocks) {
+      for (TextLine textLine in block.lines) {
+        for (TextElement textElement in textLine.elements) {
+          setState(() {
+            finalText = finalText + " " + textElement.text;
+          });
+        }
+
+        finalText = finalText + '\n';
+      }
+    }
+  }*/
+
+  // this is for getting the image form the gallery
+  void getImage() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      myImagePath = File(image!.path);
+      isLoaded = true;
+      imagePath = image.path.toString();
+    });
+  }
+}
+
+
+
+
+
+/*import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'face_detection.dart';
+
+class FaceDetectorHome extends StatefulWidget {
+  
+  @override
+  State<StatefulWidget> createState() => _FaceDetectorHomeState();
+}
+
+class _FaceDetectorHomeState extends State<FaceDetectorHome> {
+  late File image;
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Face Detection'),
+        ),
+        body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                buildRowTitle(context, 'Pick Image'),
+                buildSelectImageRowWidget(context)
+              ],
+            )
+        )
+    );
+  }
+
+  Widget buildRowTitle(BuildContext context, String title) {
+    return Center(
+        child: Padding(
+          padding:const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+          child: Text(
+            title,
+            style: Theme.of(context).textTheme.headline1,
+          ),
+        )
+    );
+  }
+
+  Widget buildSelectImageRowWidget(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        createButton('Camera'),
+        createButton('Gallery')
+      ],
+    );
+  }
+
+  Widget createButton(String imgSource) {
+    return Expanded(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child:RaisedButton(
+              color: Colors.blue,
+              textColor: Colors.white,
+              splashColor: Colors.blueGrey,
+              onPressed: () {
+                onPickImageSelected(imgSource);
+              },
+              child: Text(imgSource)),
+        )
+    );
+  }
+
+
+  onPickImageSelected(String imgSource) async {
+    ImageSource src;
+    if(imgSource == 'Gallery') {
+      src = ImageSource.gallery;
+    } else {
+      src = ImageSource.camera;
+    }
+
+    final ImagePicker _picker = ImagePicker();
+    final XFile? image = await _picker.pickImage(source: src);
+    File imgFile = File(image!.path);
+    //if(imgFile==null)
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => FaceDetection(imgFile)),
+    );
+  }
+}*/

@@ -20,3 +20,5 @@ Icon profileIcon = const Icon(Icons.person);
 Icon notifIcon = const Icon(Icons.notifications);
 Icon writePost = const Icon(Icons.border_color);
 Icon friendsIcon = const Icon(Icons.group);
+Icon cameraIcon = const Icon(Icons.camera_alt_outlined);
+Icon libraryIcon = const Icon(Icons.photo_library_outlined);

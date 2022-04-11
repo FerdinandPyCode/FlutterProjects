@@ -15,5 +15,5 @@ class ColorTheme {
 
   static Color pointer() => Colors.teal;
   static Color base() => (isDarkMode()) ? Colors.black54 : Colors.white;
-  static Color accent() => (isDarkMode()) ? Colors.grey : Colors.black38;
+  static Color accent() => (isDarkMode()) ? Colors.grey : Colors.grey;
 }

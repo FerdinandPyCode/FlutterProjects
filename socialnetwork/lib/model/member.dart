@@ -13,7 +13,18 @@ class Member {
   late String description;
 
   Member(DocumentSnapshot snapshot) {
-    print(snapshot);
+    ref = snapshot.reference;
+    uid = snapshot.id;
+    Object? datas = snapshot.data();
+    datas = datas as Map;
+
+    name = datas[nameKey];
+    surname = datas[surnameKey];
+    imageUrl = datas[imageUrlKey];
+    followers = datas[followersKey];
+    following = datas[followingKey];
+    description =
+        (datas[descriptionKey] == null) ? "Powerful" : datas[descriptionKey];
   }
   Map<String, dynamic> toMap() {
     return {

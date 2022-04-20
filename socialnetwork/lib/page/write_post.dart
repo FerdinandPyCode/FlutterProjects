@@ -6,9 +6,11 @@ import 'package:socialnetwork/custom_widget/my_textfield.dart';
 import 'package:socialnetwork/custom_widget/padding_with.dart';
 import 'package:socialnetwork/model/color_theme.dart';
 import 'package:socialnetwork/util/constants.dart';
+import 'package:socialnetwork/util/firebase_handler.dart';
 
 class WritePost extends StatefulWidget {
-  const WritePost({Key? key}) : super(key: key);
+  String? memberId = "";
+  WritePost({Key? key, required this.memberId}) : super(key: key);
 
   @override
   _WritePostState createState() => _WritePostState();
@@ -70,7 +72,7 @@ class _WritePostState extends State<WritePost> {
                           icon: libraryIcon)
                     ],
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.height * 0.3,
                     child: (imageFile == null)
@@ -95,6 +97,7 @@ class _WritePostState extends State<WritePost> {
                         child: const Text("Envoyer"),
                         onPressed: () {
                           //Envoyer à firebase
+                          sendToFirebase();
                         },
                       ),
                     ),
@@ -110,10 +113,21 @@ class _WritePostState extends State<WritePost> {
 
   Future<void> pickImage(ImageSource source) async {
     final ImagePicker _picker = ImagePicker();
-    final XFile? image =
-        await _picker.pickImage(source: source, maxHeight: 500, maxWidth: 500);
+    final XFile? image = await _picker.pickImage(source: source);
     if (image != null) {
-      imageFile = File(image.path);
+      setState(() {
+        imageFile = File(image.path);
+      });
+    }
+  }
+
+  sendToFirebase() {
+    FocusScope.of(context).requestFocus(FocusNode());
+    Navigator.pop(context);
+    if ((imageFile != null) ||
+        (_controller.text != null && _controller.text != "")) {
+      FirebaseHandler().addPostToFirebase(
+          "${widget.memberId}", _controller.text, imageFile!);
     }
   }
 }

@@ -15,16 +15,16 @@ class ProfileImage extends InkWell {
             child: Column(
               children: [
                 Visibility(
-                  visible: !urlValid,
+                  visible: urlValid,
                   child: CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: imageSize,
-                    backgroundImage: /* CachedNetworkImageProvider*/ NetworkImage(
+                    backgroundImage: CachedNetworkImageProvider(
                         urlString),
                   ),
                 ),
                 Visibility(
-                  visible: urlValid,
+                  visible: !urlValid,
                   child: CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: imageSize,

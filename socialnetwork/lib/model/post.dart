@@ -18,13 +18,13 @@ class Post {
     Object? datas = snapshot.data();
     datas = datas as Map;
     print("--------------->  Beginning");
-    id = datas?[postIdKey];
-    memberId = datas?[uidKey];
-    text = datas?[textKey];
-    imageUrl = datas?[imageUrlKey];
-    date = datas?[dateKey];
-    likes = datas?[likeKey];
-    comments = datas?[commentKey];
+    id = datas[postIdKey];
+    memberId = datas[uidKey];
+    text = datas[textKey];
+    imageUrl = datas[imageUrlKey];
+    date = datas[dateKey];
+    likes = datas[likeKey];
+    comments = datas[commentKey];
   }
 
   Map<String, dynamic> toMap() {

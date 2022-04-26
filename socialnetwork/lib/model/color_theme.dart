@@ -14,6 +14,8 @@ class ColorTheme {
   }
 
   static Color pointer() => Colors.teal;
-  static Color base() => (isDarkMode()) ? Colors.black54 : Colors.white;
+  static Color base() => (isDarkMode()) ? const Color.fromRGBO(33,33, 33, 1) : Colors.white;
   static Color accent() => (isDarkMode()) ? Colors.grey : Colors.grey;
+  Color textColor() => (isDarkMode()) ? Colors.white: Colors.black;
+
 }

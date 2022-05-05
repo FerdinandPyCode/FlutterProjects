@@ -113,19 +113,19 @@ class _ListScreenState extends State<ListScreen> {
                         );
                       },*/
                       
-                      child: /*Row(
+                      child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           
-                          
+                          /*
                           Visibility(
-                              visible: items[index].picture!='assets/2.png',
+                              visible: items[index].picture!='',
                               child: Container(
                                 margin: const EdgeInsets.all(5.0),
                                 height: 70.0,
                                 width: 70.0,
                                 child:CircleAvatar(
-                                backgroundImage:FileImage(File(items[index].picture)),
+                                backgroundImage:NetworkImage(items[index].picture),
                                 radius: 30,
                                 ),
                             
@@ -133,28 +133,28 @@ class _ListScreenState extends State<ListScreen> {
                             ),
                            const SizedBox(width: 12.0,),
                            Visibility(
-                              visible: items[index].picture=='assets/2.png',
+                              visible: items[index].picture=='',
                               child: Container(
                                 margin: const EdgeInsets.all(5.0),
                                 height: 70.0,
                                 width: 70.0,
-                                child:CircleAvatar(
-                                backgroundImage: AssetImage(items[index].picture),
+                                child:const CircleAvatar(
+                                backgroundImage: AssetImage("assets/2.png"),
                                 radius: 30,
                                 ),
                               ),
                             ),
-                           const SizedBox(width: 12.0,),
-                         Container(
-                           margin: const EdgeInsets.all(5.0),
-                           height: 70.0,
-                           width: 70.0,
-                           child:const CircleAvatar(
-                           backgroundImage: AssetImage("assets/2.png"),
-                           radius: 30,
-                           ),
-                         ),
-                         const SizedBox(width: 12.0,),
+                        const SizedBox(width: 12.0,),*/
+                        Container(
+                          margin: const EdgeInsets.all(5.0),
+                          height: 70.0,
+                          width: 70.0,
+                          child:const CircleAvatar(
+                          backgroundImage: AssetImage("assets/2.png"),
+                          radius: 30,
+                          ),
+                        ),
+                        const SizedBox(width: 12.0,),
                          
                         Container(
                           padding:const EdgeInsets.only(left:0),
@@ -163,6 +163,7 @@ class _ListScreenState extends State<ListScreen> {
                             children:[
                               Text(
                                 "${items[index].lastname} ${items[index].firstname}",
+                                overflow: TextOverflow.ellipsis,
                                 //textAlign: TextAlign.start,
                                 style:const TextStyle(
                                   color: Colors.black,
@@ -175,9 +176,9 @@ class _ListScreenState extends State<ListScreen> {
                         )
                       
                       ]
-                      ),*/
+                      ),
 
-                        ListTile(
+                       /* ListTile(
                           leading:Row(
                             children: [
                                 Visibility(
@@ -224,7 +225,7 @@ class _ListScreenState extends State<ListScreen> {
                               fontSize: 13.0,
                             ),
                           ),
-                        ),
+                        ),*/
                       )
                     );
                   },

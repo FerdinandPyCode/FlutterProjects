@@ -18,9 +18,15 @@ Future<List<Human>> fetchPeople() async {
     // then parse the JSON.
     print("------------La c'est dans un instant---------------");
 
-    print(jsonDecode(response.body));
+    print("------------> ${jsonDecode(response.body)["message"]}");
 
-    mylist.add(Human.fromMap(jsonDecode(response.body)));
+    var total=jsonDecode(response.body)["message"] as List;
+
+    total.forEach((element) {
+
+        mylist.add(Human.fromMap(element));
+        
+     });
 
     return mylist;
 

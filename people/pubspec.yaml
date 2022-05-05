@@ -36,6 +36,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   sqflite: ^2.0.0
   image_picker: ^0.8.4+11
+  http: ^0.13.4
+  
 
 dev_dependencies:
   flutter_test:

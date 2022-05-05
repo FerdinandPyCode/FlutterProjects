@@ -28,26 +28,14 @@ class PageDetail extends StatelessWidget {
            Center(
               child:Column(
                children: [
-                Visibility(
-                  visible: item.picture=='assets/2.png',
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    child: const CircleAvatar(
-                     backgroundImage:AssetImage("assets/2.png"),
-                     radius: 75,
-                    ),
+              Container(
+                  margin: const EdgeInsets.all(10),
+                  child: const CircleAvatar(
+                    backgroundImage:AssetImage("assets/2.png"),
+                    radius: 75,
                   ),
                 ),
-                Visibility(
-                   visible:item.picture!='assets/2.png',
-                  child: Container(
-                    margin: const EdgeInsets.all(10),
-                    child:CircleAvatar(
-                     backgroundImage:FileImage(File(item.picture),),
-                     radius: 75,
-                               ),
-                  ),
-                ),
+              
                Padding(
                  padding: const EdgeInsets.all(10.0),
                  child: Text(
@@ -59,22 +47,11 @@ class PageDetail extends StatelessWidget {
                    ),
                  ),
                ),
-               Padding(
-                 padding: const EdgeInsets.all(10.0),
-                 child: Text(
-                   item.mail,
-                   textAlign: TextAlign.center,
-                   style:const TextStyle(
-                     color: Colors.black,
-                     fontSize: 13.5
-                   ),
-                 ),
-               ),
-               ],
-              ),
+               
+             ],
             ),
+          ),
             const Divider(height: 10,thickness: 5,),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -106,7 +83,6 @@ class PageDetail extends StatelessWidget {
                 ),
               ],
             ),
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

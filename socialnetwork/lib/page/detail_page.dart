@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:socialnetwork/model/member.dart';
 import 'package:socialnetwork/model/member_comment.dart';
 import 'package:socialnetwork/model/post.dart';
+import 'package:socialnetwork/tile/comment_tile.dart';
 import 'package:socialnetwork/tile/post_tile.dart';
 import 'package:socialnetwork/util/constants.dart';
 
@@ -38,7 +39,7 @@ class DetailState extends State<DetailPage> {
 
               itemBuilder: (context, index) {
                 if (index == 0) {
-                  return PostTile(post: widget.post, member: widget.member, isDetail: true,);
+                  return PostTile(post: widget.post, member: widget.member, /*isDetail: true,*/);
                 } else {
                   MemberComment comment = comments[index - 1];
                   return CommentTile(memberComment: comment);

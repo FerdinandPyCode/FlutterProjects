@@ -89,7 +89,7 @@ class _ProfilePageState extends State<ProfilePage> {
       expandedHeight: 200,
       actions: [
         IconButton(
-          icon: const Icon(Icons.logout_outlined),
+          icon: const Icon(Icons.settings,size: 40,),
           onPressed: () {
             AlerteHelper().disconnect(context);
           },
@@ -99,12 +99,17 @@ class _ProfilePageState extends State<ProfilePage> {
         background: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage(profileImage), fit: BoxFit.cover)),
+                  image: AssetImage(
+                    profileImage
+                    ),
+                    fit: BoxFit.cover
+                )
+              ),
         ),
         title: (scrolled)
             ? Row(
           children: [
-            ProfileImage(urlString: widget.member.imageUrl, onPressed: () {}, imageSize: 20,urlValid: widget.member.imageUrl!=null,),
+            ProfileImage(urlString: widget.member.imageUrl, onPressed: () {}, imageSize: 10,urlValid: widget.member.imageUrl!=null,),
             Text("${widget.member.surname} ${widget.member.name}"),
           ],
         ): ProfileImage(urlString: widget.member.imageUrl, onPressed: (() => takePicture()), imageSize: 50,urlValid: widget.member.imageUrl!=null,),

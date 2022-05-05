@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'dbhelper.dart';
 import 'list.dart';
-
+import 'fetch_data.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DatabaseHandler().initializeDB();
+  
   runApp(MyApp());
 }
 

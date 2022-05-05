@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:people/fetch_data.dart';
 import 'add.dart';
 import 'dbhelper.dart';
 import 'model.dart';
@@ -14,11 +15,11 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  late DatabaseHandler handler=DatabaseHandler();
+  late FetchData handler=FetchData();
   late Future<List<Human>> _humans=getList();
   
 
-  @override
+  /*@override
   void initState() {
     super.initState();
     handler = DatabaseHandler();
@@ -27,10 +28,22 @@ class _ListScreenState extends State<ListScreen> {
         _humans = getList();
       });
     });
+    FetchData().fetchPeople();
+  }*/
+  @override
+  void initState() {
+    super.initState();
+    handler = FetchData();
+    handler.fetchPeople().whenComplete(() async {
+      setState(() {
+        _humans = getList();
+      });
+    });
   }
+  
 
   Future<List<Human>> getList() async {
-    return await handler.allPeople();
+    return await handler.fetchPeople();
   }
 
   Future<void> _onRefresh() async {
@@ -75,50 +88,37 @@ class _ListScreenState extends State<ListScreen> {
                 child: ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Dismissible(
-                      direction: DismissDirection.startToEnd,
-                      background: Container(
-                        color: Colors.red,
-                        alignment: Alignment.centerLeft,
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: const Icon(Icons.delete_forever),
-                      ),
-                      key: ValueKey<int>(items[index].id),
-                      onDismissed: (DismissDirection direction) async {
-                        await handler.deletepeople(items[index].id);
-                        setState(() {
-                          items.remove(items[index]);
-                        });
+                    return Card(
+                      elevation: 10.0,
+                        child: InkWell(
+                          splashColor: Colors.green,
+
+                          onTap: () {
+                           
+                            Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return PageDetail(items[index]);
+                            }),
+                        );
+                        _onRefresh();
                       },
-                      child: Card(
-                        elevation: 10.0,
-                          child: InkWell(
-                            splashColor: Colors.green,
 
-                            onTap: () {
-                              //print("+++++++++++++++++++++ ${items[index].id}");
-                              Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return PageDetail(items[index]);
-                              }),
-                          );
-                          _onRefresh();
-                        },
-
-                        onLongPress: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (BuildContext context) {
-                                return EdditScreen(items[index]);
-                              }),
-                          );
-                        },
-                        
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Visibility(
+                      /*onLongPress: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (BuildContext context) {
+                              return EdditScreen(items[index]);
+                            }),
+                        );
+                      },*/
+                      
+                      child: /*Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          
+                          
+                          Visibility(
                               visible: items[index].picture!='assets/2.png',
                               child: Container(
                                 margin: const EdgeInsets.all(5.0),
@@ -145,36 +145,87 @@ class _ListScreenState extends State<ListScreen> {
                               ),
                             ),
                            const SizedBox(width: 12.0,),
-                          Container(
-                            padding:const EdgeInsets.only(left:0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children:[
-                                Text(
-                                  "${items[index].lastname} ${items[index].firstname}",
-                                  //textAlign: TextAlign.start,
-                                  style:const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 15.0,
-                                    fontWeight: FontWeight.bold
-                                  ),
+                         Container(
+                           margin: const EdgeInsets.all(5.0),
+                           height: 70.0,
+                           width: 70.0,
+                           child:const CircleAvatar(
+                           backgroundImage: AssetImage("assets/2.png"),
+                           radius: 30,
+                           ),
+                         ),
+                         const SizedBox(width: 12.0,),
+                         
+                        Container(
+                          padding:const EdgeInsets.only(left:0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children:[
+                              Text(
+                                "${items[index].lastname} ${items[index].firstname}",
+                                //textAlign: TextAlign.start,
+                                style:const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.bold
                                 ),
-
-                              const SizedBox(height: 10.0,),
-                                Text(
-                                  "${items[index].mail} ",
-                                  //textAlign: TextAlign.start,
-                                  style:const TextStyle(
-                                    color: Colors.black,
-                                    fontSize: 13.0,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )
-                        ]),
+                              ),
+                            ],
+                          ),
                         )
-                      ),
+                      
+                      ]
+                      ),*/
+
+                        ListTile(
+                          leading:Row(
+                            children: [
+                                Visibility(
+                                visible: items[index].picture!='assets/2.png',
+                                child: Container(
+                                  margin: const EdgeInsets.all(5.0),
+                                  height: 70.0,
+                                  width: 70.0,
+                                  child:CircleAvatar(
+                                  backgroundImage:NetworkImage(items[index].picture),
+                                  radius: 30,
+                                  ),
+                                ),
+                              ),
+                           
+                            Visibility(
+                                visible: items[index].picture=='assets/2.png',
+                                child: Container(
+                                  margin: const EdgeInsets.all(5.0),
+                                  height: 70.0,
+                                  width: 70.0,
+                                  child:CircleAvatar(
+                                  backgroundImage: AssetImage(items[index].picture),
+                                  radius: 30,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ) ,
+                          title: Text(
+                            "${items[index].lastname} ${items[index].firstname}",
+                            //textAlign: TextAlign.start,
+                            style:const TextStyle(
+                              color: Colors.black,
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.bold
+                            ),
+                          ),
+                          subtitle:Text(
+                            "${items[index].phone} ",
+                            //textAlign: TextAlign.start,
+                            style:const TextStyle(
+                              color: Colors.black,
+                              fontSize: 13.0,
+                            ),
+                          ),
+                        ),
+                      )
                     );
                   },
                 ),

@@ -1,9 +1,7 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'dbhelper.dart';
 import 'model.dart';
-import 'dateconverter.dart';
-import 'package:image_picker/image_picker.dart';
+
 
 class AddScreen extends StatefulWidget {
   @override
@@ -16,12 +14,12 @@ class _AddScreenState extends State<AddScreen> {
   String lastname = "";
   String adress = "";
   String phone = "";
-  String mail = "";
+  //String mail = "";
   String gender = "Masculin";
   String picture = "assets/2.png";
   String citation = "";
-  int birthday = 0;
-  String date = "";
+  //int birthday = 0;
+  //String date = "";
   String msg = "";
   String msg2="";
 
@@ -132,7 +130,7 @@ class _AddScreenState extends State<AddScreen> {
 
                 const SizedBox(height: 10.0,),
 
-                TextFormField(
+                /*TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter your mail address';
@@ -153,7 +151,7 @@ class _AddScreenState extends State<AddScreen> {
                   },
                 ),
 
-                const SizedBox(height: 10.0,),
+                const SizedBox(height: 10.0,),*/
 
                 DropdownButton(
                 
@@ -201,7 +199,7 @@ class _AddScreenState extends State<AddScreen> {
                   },
                 ),
 
-              const SizedBox(height: 10.0,),
+              /*const SizedBox(height: 10.0,),
 
               OutlinedButton(
                 
@@ -231,9 +229,9 @@ class _AddScreenState extends State<AddScreen> {
                   ),
                 ),
 
-                const SizedBox(height: 10.0,),
+                const SizedBox(height: 10.0,),*/
 
-              OutlinedButton(
+              /*OutlinedButton(
                 
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
@@ -248,48 +246,45 @@ class _AddScreenState extends State<AddScreen> {
                       fontSize: 18.0
                   ),
                 ),
-                ),
+                ),*/
                 
 
                 const SizedBox(height: 20.0,),
 
                 ElevatedButton(
+
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
-                      if(date==""){
-                        setState(() {
-                          msg="Error";
-                        });
-                      }else{
+                      
+                       
                           await DatabaseHandler()
                             .insertpeople(Human(
                             firstname: firstname,
                             lastname: lastname,
-                            id: Random().nextInt(50),
-                            birthday: birthday,
+                            //id: Random().nextInt(50),
+                            //birthday: birthday,
                             adress: adress,
                             phone: phone,
-                            mail: mail,
+                            //mail: mail,
                             gender: gender,
                             picture: picture,
                             citation: citation
                             ))
                             .whenComplete(() => Navigator.pop(context)
                         );
-                      }
-          
-                    } else {
+                      }else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content:Text('Processing Data')),
                       );
-                    }
-                  },
-                  child: const Text(
-                    'Enregistrer',
-                    style: TextStyle(
-                      fontSize: 20,
-                    ),
-                  ),
+                      }
+                    },
+                    child: const Text(
+                      'Enregistrer',
+                      style: TextStyle(
+                        fontSize: 20,
+                      ),
+                    )
+                
                 ),
               ],
             ),
@@ -299,7 +294,7 @@ class _AddScreenState extends State<AddScreen> {
     );
   }
 
-    Future montrerPicker() async {
+    /*Future montrerPicker() async {
     DateTime? choix = await showDatePicker(
       context: context,
       initialDate: DateTime(2010),
@@ -327,5 +322,5 @@ class _AddScreenState extends State<AddScreen> {
         msg2="imagefromuser.png";
       });
     }
-  }
+  }*/
 }

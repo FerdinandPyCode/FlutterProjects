@@ -6,14 +6,15 @@ import 'package:socialnetwork/model/member.dart';
 import 'package:socialnetwork/model/member_comment.dart';
 import 'package:socialnetwork/util/firebase_handler.dart';
 
+// ignore: must_be_immutable
 class CommentTile extends StatelessWidget {
   MemberComment? memberComment;
 
-  CommentTile({required this.memberComment});
+  CommentTile({Key? key, required this.memberComment}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    
     return StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
       stream: FirebaseHandler().fire_user.doc(memberComment!.memberId).snapshots(),
         builder: (context, snap) {
@@ -26,15 +27,15 @@ class CommentTile extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
-                  children: [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-                    ProfileImage(urlString: member.imageUrl, onPressed: () {}),                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              <²²                                                                     ²                                          ²                                                                                                                                                                                                                                                                                                            X²²²²²²²²  
-                    Text("${member.surname} ${member.name}")
+                  children: [                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+                   ProfileImage(urlString: member.imageUrl, onPressed: (){},urlValid: member.imageUrl!=null),
+                   Text("${member.surname} ${member.name}"),
                   ],
                 ),
-                Text(memberComment.date, style: TextStyle(color: ColorTheme.pointer(), fontStyle: FontStyle.italic),)
+                Text(memberComment!.date, style: TextStyle(color: ColorTheme.pointer(), fontStyle: FontStyle.italic),)
               ],
             ),
-            Center(child: Text(memberComment.text),)
+            Center(child: Text(memberComment!.text),)
           ],
         );
       } else {

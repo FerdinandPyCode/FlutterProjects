@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:whatsappclone/tabs/appeltab.dart';
+import 'package:whatsappclone/tabs/messagetab.dart';
+import 'package:whatsappclone/tabs/statustab.dart';
 void main() {
   runApp(const MyApp());
 }
@@ -196,7 +199,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
                 mini: true,
                 child: const Icon(Icons.edit),
                 backgroundColor: Colors.white,
-                foregroundColor:Colors.red, //fabBgSecondaryColor,
+                foregroundColor:Colors.green, //fabBgSecondaryColor,
                 onPressed: () {
                   /*Application.router.navigateTo(
                     context,
@@ -210,7 +213,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
              FloatingActionButton(
                 heroTag: 'newStatus',
                 child: const Icon(Icons.camera_alt),
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
                 onPressed: () {
                   /*Application.router.navigateTo(
@@ -224,7 +227,7 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
       ),
        FloatingActionButton(
           child: const Icon(Icons.add_call),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.green,
           foregroundColor: Colors.white,
           onPressed: () {
             /*Application.router.navigateTo(
@@ -360,10 +363,10 @@ class _MyHomePageState extends State<MyHomePage> with SingleTickerProviderStateM
         body: TabBarView(
           controller: _tabController,
           children: <Widget>[
-            Container(color: Colors.blue,),
-            Container(color: Colors.redAccent,),
-            Container(color: Colors.orange,),
-            Container(color: Colors.yellow,),
+            Container(color: Colors.transparent,),
+            const MessageTab(),
+            const StatusTab(),
+            const AppelTAb(),
           ],
         ),
         floatingActionButton: _fabs[_tabIndex],

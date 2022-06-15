@@ -89,13 +89,14 @@ class _ProfilePageState extends State<ProfilePage> {
       expandedHeight: 200,
       actions: [
         IconButton(
-          icon: const Icon(Icons.settings,size: 40,),
+          icon: const Icon(Icons.settings,size: 30,),
           onPressed: () {
             AlerteHelper().disconnect(context);
           },
         )
       ],
       flexibleSpace: FlexibleSpaceBar(
+        centerTitle: false,
         background: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -108,18 +109,27 @@ class _ProfilePageState extends State<ProfilePage> {
         ),
         title: (scrolled)
             ? Row(
+              mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            ProfileImage(urlString: widget.member.imageUrl, onPressed: () {}, imageSize: 10,urlValid: widget.member.imageUrl!=null,),
+            ProfileImage(urlString: widget.member.imageUrl, onPressed: () {}, imageSize: 20,urlValid: widget.member.imageUrl!=null),
+            //Container(height: 10,width: 10,color: Colors.red,),
+            const SizedBox(width: 7.5,),
             Text("${widget.member.surname} ${widget.member.name}"),
           ],
-        ): ProfileImage(urlString: widget.member.imageUrl, onPressed: (() => takePicture()), imageSize: 50,urlValid: widget.member.imageUrl!=null,),
+        ): //Container(height: 10,width: 10,color: Colors.red,),
+        SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: 80,/*left: MediaQuery.of(context).size.width8*/right:MediaQuery.of(context).size.width/6 ),
+            child: Center(child: ProfileImage(urlString: widget.member.imageUrl, onPressed: (() => takePicture()), imageSize: 40,urlValid: widget.member.imageUrl!=null,)),
+          ),
+        ),
       ),
     );
   }
 
   SliverPersistentHeader persistent() {
     return SliverPersistentHeader(
-      pinned: true,
+      //pinned: true,
         delegate: HeaderDelegate(
             member: widget.member,
             callback: updateUser,

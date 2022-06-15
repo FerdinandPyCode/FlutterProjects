@@ -3,34 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:socialnetwork/util/images.dart';
 
 class ProfileImage extends InkWell {
+  
   ProfileImage(
       {Key? key,
       required String urlString,
       required VoidCallback onPressed,
-      double imageSize: 20,
+      double imageSize = 20,
       required bool urlValid})
       : super(
-            key: key,
+            //key: key,
             onTap: onPressed,
-            child: Column(
-              children: [
-                Visibility(
-                  visible: urlValid,
-                  child: CircleAvatar(
+            child:(!urlValid) ? CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: imageSize,
                     backgroundImage: CachedNetworkImageProvider(
                         urlString),
-                  ),
-                ),
-                Visibility(
-                  visible: !urlValid,
-                  child: CircleAvatar(
+                  ):CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: imageSize,
                     backgroundImage: AssetImage(logoImage),
                   ),
-                ),
-              ],
-            ));
+        );
+                
 }

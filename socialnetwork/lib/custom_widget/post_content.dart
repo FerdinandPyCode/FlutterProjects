@@ -19,6 +19,7 @@ class PostContent extends StatelessWidget {
               Row(
                 children: [
                   ProfileImage(urlString: member.imageUrl, onPressed: () {},urlValid: member.imageUrl!=null,),
+                  const SizedBox(width: 10,),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

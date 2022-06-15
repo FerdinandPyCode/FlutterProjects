@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "499875847734",
+    "project_id": "caisse-a304b",
+    "storage_bucket": "caisse-a304b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:499875847734:android:1e6cf2d1666cfce027c297",
+        "android_client_info": {
+          "package_name": "com.example.caisse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "499875847734-2gugshakobe19bujd1h82gkmus486ife.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAuU3jogmr4d6zDHwCjjIlX9lI1RiNGQBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "499875847734-2gugshakobe19bujd1h82gkmus486ife.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

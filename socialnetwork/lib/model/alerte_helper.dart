@@ -76,7 +76,7 @@ class AlerteHelper {
 
   Future<void> writeAComment(BuildContext context, {required Post post, required TextEditingController commentController, required member}) async{
     MyTextField commentTextField = MyTextField(controller: commentController, hint: "Ectivez un commentaire",);
-    Text title = Text("Nouveau Commentaire");
+    Text title = const Text("Nouveau Commentaire");
     return showDialog(context: context, builder: (BuildContext ctx) {
       return AlertDialog(
         title: title,

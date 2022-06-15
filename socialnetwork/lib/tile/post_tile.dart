@@ -3,13 +3,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:socialnetwork/custom_widget/padding_with.dart';
 import 'package:socialnetwork/custom_widget/post_content.dart';
-import 'package:socialnetwork/custom_widget/profile_image.dart';
 import 'package:socialnetwork/model/alerte_helper.dart';
 import 'package:socialnetwork/model/member.dart';
 import 'package:socialnetwork/model/post.dart';
 import 'package:socialnetwork/page/detail_page.dart';
 import 'package:socialnetwork/util/constants.dart';
-import 'package:socialnetwork/util/date_handler.dart';
 import 'package:socialnetwork/util/firebase_handler.dart';
 
 class PostTile extends StatelessWidget {
@@ -61,6 +59,7 @@ class PostTile extends StatelessWidget {
         ),
       ),
       onTap: (){
+        print('--------------> poste tapped');
         Navigator.pop(context,MaterialPageRoute(
           builder: ((BuildContext ctx){
             return DetailPage(post: post, member: member);

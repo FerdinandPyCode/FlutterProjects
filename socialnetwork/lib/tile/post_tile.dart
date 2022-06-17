@@ -1,5 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:socialnetwork/custom_widget/padding_with.dart';
 import 'package:socialnetwork/custom_widget/post_content.dart';
@@ -60,7 +58,7 @@ class PostTile extends StatelessWidget {
       ),
       onTap: (){
         print('--------------> poste tapped');
-        Navigator.pop(context,MaterialPageRoute(
+        Navigator.push(context,MaterialPageRoute(
           builder: ((BuildContext ctx){
             return DetailPage(post: post, member: member);
           }))

@@ -36,10 +36,9 @@ class DetailState extends State<DetailPage> {
           });
           print(comments.length);
           return ListView.separated(
-
               itemBuilder: (context, index) {
                 if (index == 0) {
-                  return PostTile(post: widget.post, member: widget.member, /*isDetail: true,*/);
+                  return PostTile(post: widget.post, member: widget.member,/* isDetail: true,*/);
                 } else {
                   MemberComment comment = comments[index - 1];
                   return CommentTile(memberComment: comment);

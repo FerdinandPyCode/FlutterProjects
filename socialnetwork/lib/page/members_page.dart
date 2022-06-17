@@ -43,7 +43,7 @@ class _MembersPageState extends State<MembersPage> {
                       final memberMap = list[index];
                       final member = Member(memberMap);
                       return ListTile(
-                        leading: ProfileImage(urlString: member.imageUrl, onPressed: (){},urlValid: member.imageUrl!=null,),
+                        leading: ProfileImage(urlString: member.imageUrl, onPressed: (){},urlValid: member.imageUrl!=null&&member.imageUrl!="",),
                         title: Text("${member.surname} ${member.name}", style: TextStyle(color: ColorTheme().textColor()),),
                         trailing: TextButton(
                           onPressed: () {
@@ -68,7 +68,7 @@ class _MembersPageState extends State<MembersPage> {
                 )
             );
           } else {
-            return Center(child: Text("Aucun utilisateur sur cette app"),);
+            return const Center(child: Text("Aucun utilisateur sur cette app"),);
           }
         }
     );

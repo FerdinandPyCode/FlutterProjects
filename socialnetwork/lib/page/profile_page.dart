@@ -196,7 +196,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   picker(ImageSource source) async {
-    final f = await ImagePicker().pickImage(source: source, maxWidth: 500, maxHeight: 500);
+    final f = await ImagePicker().pickImage(source: source, /*maxWidth: 1000, maxHeight: 1000*/);
     final File file = File(f!.path);
     FirebaseHandler().modifyPicture(file);
   }

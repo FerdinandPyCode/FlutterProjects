@@ -13,13 +13,13 @@ class ProfileImage extends InkWell {
       : super(
             //key: key,
             onTap: onPressed,
-            child:(!urlValid) ? CircleAvatar(
+            child:(urlValid) ? CircleAvatar(
                     backgroundColor: Colors.red,
                     radius: imageSize,
                     backgroundImage: CachedNetworkImageProvider(
                         urlString),
                   ):CircleAvatar(
-                    backgroundColor: Colors.red,
+                    backgroundColor: Colors.blue,
                     radius: imageSize,
                     backgroundImage: AssetImage(logoImage),
                   ),

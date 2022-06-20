@@ -1,19 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import "package:flutter/material.dart";
+import 'package:socialnetwork/model/inside_otif.dart';
 import 'package:socialnetwork/model/member.dart';
+import 'package:socialnetwork/tile/notif_tile.dart';
+import 'package:socialnetwork/util/firebase_handler.dart';
+
 
 class NotifPage extends StatefulWidget {
-  late Member member;
-  NotifPage({Key? key, required this.member}) : super(key: key);
+  Member member;
+
+  NotifPage({required this.member});
 
   @override
-  _NotifPageState createState() => _NotifPageState();
+  State<StatefulWidget> createState() => NotifState();
+
 }
 
-class _NotifPageState extends State<NotifPage> {
+class NotifState extends State<NotifPage> {
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text("Notif Page"),
-    );
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: FirebaseHandler().fire_notif.doc(FirebaseHandler().authInstance.currentUser!.uid).collection("InsideNotif").snapshots(),
+        builder: (context, snapshots) {
+          if (snapshots.hasData) {
+            final datas = snapshots.data!.docs;
+            return ListView.separated(
+                itemBuilder: (ctx, index) {
+                  return NotifTile(notif: InsideNotif(datas[index]));
+                },
+                separatorBuilder: (ctx, index) {
+                  return Divider();
+                },
+                itemCount: datas.length
+            );
+          } else {
+            return const Center(child: Text("Aucune notif"),);
+          }
+        });
   }
 }

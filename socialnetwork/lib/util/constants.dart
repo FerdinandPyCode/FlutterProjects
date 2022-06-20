@@ -16,6 +16,9 @@ String commentKey = "comments";
 String dateKey = "date";
 String textKey = "text";
 String postIdKey = "post";
+String seenKey = "seen";
+String typeKey = "type";
+String follow = "follow";
 //Icons
 
 Icon homeIcon = const Icon(Icons.house_rounded);

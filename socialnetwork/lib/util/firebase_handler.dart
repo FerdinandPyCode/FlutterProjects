@@ -1,7 +1,10 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as storage;
+import 'package:socialnetwork/model/inside_otif.dart';
 import 'package:socialnetwork/model/member.dart';
 
 import '../model/post.dart';
@@ -45,6 +48,7 @@ class FirebaseHandler {
   //Database
   static final firestoreInstance = FirebaseFirestore.instance;
   final fire_user = firestoreInstance.collection(memberRef);
+  final fire_notif = firestoreInstance.collection("notification");
 
   //Storage
   static final storageRef = storage.FirebaseStorage.instance.ref();
@@ -96,6 +100,7 @@ class FirebaseHandler {
       post.ref?.update({
         likeKey: FieldValue.arrayUnion([memberId])
       });
+      sendNotifTo(post.memberId!,authInstance.currentUser!.uid,"A aimé votre post", post.ref!, "like");
     }
   }
 
@@ -120,7 +125,7 @@ class FirebaseHandler {
         textKey: text
       };
       post.ref!.update({commentKey: FieldValue.arrayUnion([map])});
-      //sendNotifTo(post.memberId, authInstance.currentUser!.uid, "A commenté votre post", post.ref, comment);
+      sendNotifTo(post.memberId!, authInstance.currentUser!.uid, "A commenté votre post", post.ref!, 'comment');
     }
 
   }
@@ -137,8 +142,25 @@ class FirebaseHandler {
       member.ref.update({followersKey: FieldValue.arrayUnion([myId])});
       myRef.update({followingKey: FieldValue.arrayUnion([member.uid])});
       //Notif
-     // sendNotifTo(member.uid, authInstance.currentUser!.uid, "Vous suit désormais", fire_user.doc(authInstance.currentUser!.uid), follow);
+     sendNotifTo(member.uid, authInstance.currentUser!.uid, "Vous suit désormais", fire_user.doc(authInstance.currentUser!.uid), 'follow');
     }
   }
 
+  sendNotifTo(String to,String from,String text,DocumentReference ref,String type){
+    bool seen = false;
+    int date = DateTime.now().millisecondsSinceEpoch;
+    Map<String,dynamic> map = {
+      seenKey:seen,
+      dateKey: date,
+      textKey:text,
+      refKey:ref,
+      typeKey:type,
+      uidKey:from,
+    };
+    fire_notif.doc(to).collection("InsideNotif").add(map);
+  }
+
+  seenNotif(InsideNotif notif) {
+    notif.reference.update({seenKey: true});
+  }
 }

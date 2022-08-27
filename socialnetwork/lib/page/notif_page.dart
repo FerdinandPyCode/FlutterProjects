@@ -9,7 +9,7 @@ import 'package:socialnetwork/util/firebase_handler.dart';
 class NotifPage extends StatefulWidget {
   Member member;
 
-  NotifPage({required this.member});
+  NotifPage({Key? key, required this.member}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => NotifState();

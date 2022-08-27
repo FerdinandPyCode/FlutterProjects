@@ -53,9 +53,9 @@ class _HomePageState extends State<HomePage> {
         body: ListView.builder(
           itemCount: posts.length,
             itemBuilder: (BuildContext ctx, int index) {
-            Post post = posts[index];
-            Member member = members.singleWhere((element) => element.uid == post.memberId);
-            return PostTile(post: post, member: member);
+              Post post = posts[index];
+              Member member = members.singleWhere((element) => element.uid == post.memberId);
+              return PostTile(post: post, member: member);
             }
         )
     );

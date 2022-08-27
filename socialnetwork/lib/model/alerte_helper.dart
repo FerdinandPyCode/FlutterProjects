@@ -114,7 +114,7 @@ class AlerteHelper {
       ) async {
         MyTextField nameTF = MyTextField(controller: name, hint: member.name,);
         MyTextField surnameTF = MyTextField(controller: surname, hint: member.surname,);
-        MyTextField descTF = MyTextField(controller: desc, hint: member.description ?? "Aucune description",);
+        MyTextField descTF = MyTextField(controller: desc, hint: member.description /*?? "Aucune description"*/,);
         Text text = const Text("Modification des données");
         return showDialog(
             context: context,

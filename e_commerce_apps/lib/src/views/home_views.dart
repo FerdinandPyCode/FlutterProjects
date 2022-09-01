@@ -1,5 +1,6 @@
 import 'package:e_commerce_apps/app_theme.dart';
 import 'package:e_commerce_apps/my_flutter_app_icons.dart';
+import 'package:e_commerce_apps/src/views/home_top_sushi_view.dart';
 import 'package:e_commerce_apps/src/views/widgets/circle_button_widget.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,14 @@ class HomeView extends StatelessWidget {
                     const SizedBox(
                       height: 32,
                     ),
-                    buildHeader("Top Sushi", () {})
+                    buildHeader("Top Sushi", () {}),
+                    const SizedBox(
+                      height: 12,
+                    ),
+                    SizedBox(height: 300, child: HomeTopSushiView()),
+                    const SizedBox(
+                      height: 12,
+                    ),
                   ],
                 ),
               ),
